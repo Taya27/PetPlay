@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Helpers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -14,6 +15,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetPlayBackend.BusinessLogic\PetPlayBackend.BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

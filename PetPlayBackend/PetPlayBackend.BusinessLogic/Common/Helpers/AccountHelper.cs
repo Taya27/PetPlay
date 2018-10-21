@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace PetPlayBackend.Common.Helpers
+namespace PetPlayBackend.BusinessLogic.Common.Helpers
 {
     public class AccountHelper
     {

@@ -10,9 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PetPlayBackend.Services;
-using PetPlayBackend.Services.Interfaces;
 using Swashbuckle.AspNetCore.Swagger;
+using PetPlayBackend.BusinessLogic.Services.Interfaces;
+using PetPlayBackend.BusinessLogic.Services;
+using PetPlayBackend.BusinessLogic.Common.Helpers;
 
 namespace PetPlayBackend
 {
@@ -28,6 +29,15 @@ namespace PetPlayBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            JwtSettings jwtSettings = new JwtSettings();
+
+            Configuration.Bind(nameof(JwtSettings), jwtSettings);
+
+            services.AddSingleton<ITokenService, TokenService>(x => new TokenService(jwtSettings.ValidIssuer,
+                jwtSettings.ValidAudience, jwtSettings.IssuerSigningKey, jwtSettings.TokenLifeTime));
+
+            Binder.BindContext(services);
+
             services.AddScoped<IUserService, UserService>();
 
             services.AddSwaggerGen(options =>
