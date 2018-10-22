@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace PetPlayBackend.BusinessLogic.Services.Interfaces
 {
-    public interface IUserService
+    public interface IPetService
     {
-        Task RegisterUser(RegistrationViewModel model);
+        Task<IEnumerable<Pet>> GetAllPets();
 
-        Task<UserViewModel> FindUser(LoginViewModel model);
-
-        Task<IEnumerable<User>> GetAllUsers();
-
-        Task<User> GetUser(Guid id);
+        Task<Pet> AddNewPet(AddNewPetViewModel model);
     }
 }

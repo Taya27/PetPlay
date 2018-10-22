@@ -1,5 +1,5 @@
 <div class="example-form">
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width" style="margin-top: 100px">
     <input matInput placeholder="Login" [(ngModel)]="login">
   </mat-form-field>
 
@@ -8,4 +8,5 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="logIn()">Login</button>
+  <button mat-raised-button color="primary" (click)="navigateToRegister()" style="margin-left: 10px">Register</button>
 </div>

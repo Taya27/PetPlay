@@ -1,0 +1,27 @@
+<div class="example-form">
+  <mat-form-field class="example-full-width" style="margin-top: 20px">
+    <input matInput placeholder="Email" [(ngModel)]="email">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="password" matInput placeholder="Password" [(ngModel)]="password">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="password" matInput placeholder="Confirm password" [(ngModel)]="confirmPassword">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" style="margin-top: 10px">
+    <input matInput placeholder="Nickname" [(ngModel)]="nickname">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" style="margin-top: 10px">
+    <input matInput placeholder="First name" [(ngModel)]="firstName">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" style="margin-top: 10px">
+    <input matInput placeholder="Last name" [(ngModel)]="lastName">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="register()">Register</button>
+</div>
