@@ -13,6 +13,9 @@ namespace PetPlayBackend.BusinessLogic.Common.Mapping
         {
             CreateMap<RegistrationViewModel, User>().ReverseMap();
             CreateMap<UserViewModel, User>().ReverseMap();
+            CreateMap<User, Models.User>().ReverseMap();
+            CreateMap<Pet, Models.Pet>().ReverseMap();
+            CreateMap<AddNewPetViewModel, Domain.Models.Pet>().ReverseMap();
         }
     }
 }

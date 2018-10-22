@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body,input,textarea,select
+	{
+		font-family: 'Oxygen', sans-serif;
+		font-size: 14pt;
+		line-height: 2em;
+	}

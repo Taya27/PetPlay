@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PetPlayBackend.BusinessLogic.Models;
 using PetPlayBackend.BusinessLogic.Services.Interfaces;
-using PetPlayBackend.BusinessLogic.ViewModels;
 
 namespace PetPlayBackend.Controllers
 {
@@ -15,64 +15,47 @@ namespace PetPlayBackend.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly ITokenService _tokenService;
 
-        public UserController(IUserService userService, ITokenService tokenService)
+        public UserController(IUserService userService)
         {
             this._userService = userService;
-            this._tokenService = tokenService;
         }
 
-        [HttpPost("register")]
+        [HttpGet("get-all-users")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] RegistrationViewModel model)
+        public async Task<IActionResult> GetAllUsers()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
             try
             {
-                await _userService.RegisterUser(model);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok("Succesfully registered user");
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            UserViewModel result = null;
-            try
-            {
-                result = await _userService.FindUser(model);
+                var result = await _userService.GetAllUsers();
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
-            var jwtToken = _tokenService.BuildToken(result.Id);
-
-            return Ok(jwtToken);
         }
 
+        [HttpGet("get-user/{id}")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUser(Guid id)
+        {
+            try
+            {
+                var result = await _userService.GetUser(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

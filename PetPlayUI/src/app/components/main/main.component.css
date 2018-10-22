@@ -1,0 +1,15 @@
+#main h1{
+	font-family: 'Oxygen', sans-serif;
+	font-size: 20pt;
+	text-align: center;
+	font-weight: bold;
+
+}
+
+#main p{
+	font-size: 14pt;
+	text-align: center;
+}
+.image-center {
+	margin-left:18%;
+}

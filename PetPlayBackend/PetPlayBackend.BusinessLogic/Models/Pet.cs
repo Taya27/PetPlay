@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PetPlayBackend.Domain.Models
+namespace PetPlayBackend.BusinessLogic.Models
 {
     public class Pet
     {
@@ -10,7 +10,6 @@ namespace PetPlayBackend.Domain.Models
         public string Nickname { get; set; }
         public string Breed { get; set; }
 
-        public virtual Guid UserId { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
     }
 }
