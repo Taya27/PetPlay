@@ -34,7 +34,7 @@ namespace PetPlayBackend.BusinessLogic.Services
 
                 if (incorrectEmailOrUserName)
                 {
-                    throw new Exception("User already exists!   ");
+                    throw new Exception("UserModel already exists!   ");
                 }
 
                 var userModel = _mapper.Map<Domain.Models.User>(model);
@@ -73,11 +73,11 @@ namespace PetPlayBackend.BusinessLogic.Services
             }
         }
 
-        public async Task<IEnumerable<Models.User>> GetAllUsers()
+        public async Task<IEnumerable<Models.UserModel>> GetAllUsers()
         {
             try
             {
-                var result = _context.Users.Include(x => x.Pets).Select(x => _mapper.Map<Models.User>(x));
+                var result = _context.Users.Include(x => x.Pets).Select(x => _mapper.Map<Models.UserModel>(x));
                 return result;
             }
             catch (Exception ex)
@@ -86,18 +86,18 @@ namespace PetPlayBackend.BusinessLogic.Services
             }
         }
 
-        public async Task<Models.User> GetUser(Guid id)
+        public async Task<Models.UserModel> GetUser(Guid id)
         {
             try
             {
-                var result = await _context.Users.Include(x => x.Pets).FirstOrDefaultAsync(x => x.Id == id);
+                var result = await _context.Users.Include(x => x.Pets).Include(x => x.Accesses).FirstOrDefaultAsync(x => x.Id == id);
 
                 if (result == null)
                 {
-                    throw new Exception("User not found!");
+                    throw new Exception("UserModel not found!");
                 }
 
-                return _mapper.Map<Models.User>(result);
+                return _mapper.Map<Models.UserModel>(result);
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PetPlayBackend.BusinessLogic.Models
 {
-    public class User
+    public class UserModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -12,6 +12,7 @@ namespace PetPlayBackend.BusinessLogic.Models
         public string Email { get; set; }
         public string Nickname { get; set; }
 
-        public List<Pet> Pets { get; set; }
+        public List<AccessModel> Accesses { get; set; }
+        public List<PetModel> Pets { get; set; }
     }
 }

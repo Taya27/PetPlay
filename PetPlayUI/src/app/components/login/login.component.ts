@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PetPlayService, LoginViewModel } from 'src/app/services/petplay.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   public login: string = "";
   public password: string = "";
 
-  constructor(private petplayService: PetPlayService,
+  constructor(private authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
@@ -23,9 +24,11 @@ export class LoginComponent implements OnInit {
       password: this.password
     } as LoginViewModel;
     
-    this.petplayService.apiAuthLoginPost(loginModel).subscribe(result => {
-      alert(result);
-    })
+    this.authService.login(loginModel).subscribe(result => {
+      if (result) {
+        this.router.navigateByUrl('/profile');
+      }
+    });
   }
 
   navigateToRegister = () => {

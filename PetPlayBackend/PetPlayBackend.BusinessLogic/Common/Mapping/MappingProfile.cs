@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using PetPlayBackend.BusinessLogic.ViewModels;
 using PetPlayBackend.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PetPlayBackend.BusinessLogic.Models;
 
 namespace PetPlayBackend.BusinessLogic.Common.Mapping
 {
@@ -13,9 +11,10 @@ namespace PetPlayBackend.BusinessLogic.Common.Mapping
         {
             CreateMap<RegistrationViewModel, User>().ReverseMap();
             CreateMap<UserViewModel, User>().ReverseMap();
-            CreateMap<User, Models.User>().ReverseMap();
-            CreateMap<Pet, Models.Pet>().ReverseMap();
+            CreateMap<User, Models.UserModel>().ReverseMap();
+            CreateMap<Pet, Models.PetModel>().ReverseMap();
             CreateMap<AddNewPetViewModel, Domain.Models.Pet>().ReverseMap();
+            CreateMap<Toy, ToyModel>().ReverseMap();
         }
     }
 }

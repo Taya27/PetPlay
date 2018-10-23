@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PetPlayBackend.BusinessLogic.Models;
 using PetPlayBackend.BusinessLogic.Services.Interfaces;
 using PetPlayBackend.BusinessLogic.ViewModels;
 
@@ -23,7 +24,7 @@ namespace PetPlayBackend.Controllers
 
         [HttpPost("add-pet")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(BusinessLogic.Models.Pet), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BusinessLogic.Models.PetModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddPet([FromBody] AddNewPetViewModel model)
@@ -36,6 +37,30 @@ namespace PetPlayBackend.Controllers
             try
             {
                 var result = await _petService.AddNewPet(model);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete-pet/{petId}")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(PetModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeletePet(Guid petId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _petService.DeletePet(petId);
 
                 return Ok(result);
             }
