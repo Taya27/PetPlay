@@ -1,0 +1,27 @@
+<div class="cont">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Watch your personal info here
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-personal-info></app-personal-info>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          My friends
+        </mat-panel-title>
+        <mat-panel-description>
+          Add new friends, give access to your toys
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-my-friends></app-my-friends>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

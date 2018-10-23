@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetPlayBackend.BusinessLogic.Services
 {
@@ -22,11 +23,11 @@ namespace PetPlayBackend.BusinessLogic.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Pet>> GetAllPets()
+        public async Task<IEnumerable<PetModel>> GetAllPets()
         {
             try
             {
-                var pets = _context.Pets.Select(x => _mapper.Map<Pet>(x));
+                var pets = _context.Pets.Select(x => _mapper.Map<PetModel>(x));
 
                 return pets;
             }
@@ -36,7 +37,7 @@ namespace PetPlayBackend.BusinessLogic.Services
             }
         }
 
-        public async Task<Pet> AddNewPet(AddNewPetViewModel model)
+        public async Task<PetModel> AddNewPet(AddNewPetViewModel model)
         {
             try
             {
@@ -46,7 +47,29 @@ namespace PetPlayBackend.BusinessLogic.Services
 
                 await _context.SaveChangesAsync();
 
-                return _mapper.Map<Models.Pet>(dbModel);
+                return _mapper.Map<Models.PetModel>(dbModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<PetModel> DeletePet(Guid id)
+        {
+            try
+            {
+                var petToDelete = await _context.Pets.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (petToDelete == null)
+                {
+                    throw new Exception("Pet not found");
+                }
+
+                _context.Pets.Remove(petToDelete);
+                await _context.SaveChangesAsync();
+
+                return _mapper.Map<Models.PetModel>(petToDelete);
             }
             catch (Exception ex)
             {

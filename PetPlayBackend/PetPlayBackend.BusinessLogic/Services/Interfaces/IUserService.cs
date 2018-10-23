@@ -13,8 +13,8 @@ namespace PetPlayBackend.BusinessLogic.Services.Interfaces
 
         Task<UserViewModel> FindUser(LoginViewModel model);
 
-        Task<IEnumerable<User>> GetAllUsers();
+        Task<IEnumerable<UserModel>> GetAllUsers();
 
-        Task<User> GetUser(Guid id);
+        Task<UserModel> GetUser(Guid id);
     }
 }

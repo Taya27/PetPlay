@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PetPlayService, RegistrationViewModel } from 'src/app/services/petplay.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   firstName: string;
   lastName: string;
 
-  constructor(private apiService: PetPlayService,
+  constructor(private authService: AuthService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastName
     } as RegistrationViewModel;
 
-    this.apiService.apiAuthRegisterPost(model).subscribe(_ => {
+    this.authService.register(model).subscribe(_ => {
       this.openSnackBar();
     }, error => {
       alert("An error occured!");

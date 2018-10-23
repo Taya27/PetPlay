@@ -23,7 +23,7 @@ namespace PetPlayBackend.Controllers
 
         [HttpGet("get-all-users")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllUsers()
@@ -41,7 +41,7 @@ namespace PetPlayBackend.Controllers
 
         [HttpGet("get-user/{id}")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetUser(Guid id)

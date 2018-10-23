@@ -40,12 +40,12 @@ namespace PetPlayBackend.Controllers
             {
                 await _userService.RegisterUser(model);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
-            return Ok("Succesfully registered user");
+            return Ok("Successfully registered user");
         }
 
         [HttpPost("login")]
@@ -72,7 +72,7 @@ namespace PetPlayBackend.Controllers
 
             var jwtToken = _tokenService.BuildToken(result.Id);
 
-            return Ok(jwtToken);
+            return Ok(new {auth_token = jwtToken, user_id = result.Id});
         }
     }
 }
