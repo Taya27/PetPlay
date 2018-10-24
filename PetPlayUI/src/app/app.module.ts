@@ -34,8 +34,9 @@ import { HttpModule } from '@angular/http';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { MyPetsComponent } from './components/dialogs/my-pets/my-pets.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
-import { MyToysComponent } from './components/dialogs/my-toys/my-toys.component';
 import { MyFriendsComponent } from './components/my-friends/my-friends.component';
+import { MyToysComponent } from './components/my-toys/my-toys.component';
+import { RegisterToyDialogComponent } from './components/dialogs/register-toy-dialog/register-toy-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,8 +52,9 @@ import { MyFriendsComponent } from './components/my-friends/my-friends.component
     PersonalInfoComponent,
     MyPetsComponent,
     DeleteDialogComponent,
-    MyToysComponent,
     MyFriendsComponent,
+    MyToysComponent,
+    RegisterToyDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -89,6 +91,7 @@ import { MyFriendsComponent } from './components/my-friends/my-friends.component
   entryComponents: [
     SnackBarComponent,
     MyPetsComponent,
+    RegisterToyDialogComponent,
     DeleteDialogComponent
   ]
 })

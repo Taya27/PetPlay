@@ -41,6 +41,8 @@ namespace PetPlayBackend
 
             services.AddScoped<IToyService, ToyService>();
 
+            services.AddScoped<IAccessService, AccessService>();
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info() { Title = "PetPlay API", Version = "v1" });

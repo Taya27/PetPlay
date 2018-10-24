@@ -4,12 +4,12 @@ using System.Text;
 
 namespace PetPlayBackend.BusinessLogic.ViewModels
 {
-    public class AddNewPetViewModel
+    public class AccessViewModel
     {
-        public string Nickname { get; set; }
-        public string Breed { get; set; }
-
-        public string Kind { get; set; }
         public Guid UserId { get; set; }
+
+        public Guid ToyId { get; set; }
+
+        public bool IsOwner { get; set; }
     }
 }

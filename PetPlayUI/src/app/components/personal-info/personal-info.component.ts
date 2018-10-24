@@ -30,7 +30,7 @@ export class PersonalInfoComponent implements OnInit {
         userPets: this.currentUser.pets,
         userId: this.authService.getUserId()
       }
-    })
+    });
   }
 
 }

@@ -39,8 +39,4 @@ export class MyFriendsComponent implements OnInit {
 
     return this.users.filter(option => option.nickname.toLowerCase().startsWith(filterValue));
   }
-
-  test = () => {
-    alert(this.myControl.value.Id)
-  }
 }

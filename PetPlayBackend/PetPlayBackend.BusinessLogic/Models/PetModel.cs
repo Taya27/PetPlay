@@ -10,6 +10,8 @@ namespace PetPlayBackend.BusinessLogic.Models
         public string Nickname { get; set; }
         public string Breed { get; set; }
 
+        public string Kind { get; set; }
+
         public UserModel UserModel { get; set; }
     }
 }

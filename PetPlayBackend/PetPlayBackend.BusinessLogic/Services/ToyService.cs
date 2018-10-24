@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PetPlayBackend.BusinessLogic.Models;
 using PetPlayBackend.BusinessLogic.Services.Interfaces;
+using PetPlayBackend.BusinessLogic.ViewModels;
 using PetPlayBackend.Domain.Contexts;
+using PetPlayBackend.Domain.Models;
 
 namespace PetPlayBackend.BusinessLogic.Services
 {
@@ -20,9 +22,17 @@ namespace PetPlayBackend.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<ToyModel> AddNewToy()
+        public async Task AddNewToy(ToyViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.Toys.AddAsync(_mapper.Map<Toy>(model));
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Register new toy here</h2>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="YoyId from package" [(ngModel)]="toyId" name="toyId">
+  </mat-form-field>
+<br/>
+  <button mat-stroked-button color="primary" (click)="addNewToy()">Register</button>
+</form>

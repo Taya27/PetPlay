@@ -15,6 +15,9 @@ namespace PetPlayBackend.BusinessLogic.Common.Mapping
             CreateMap<Pet, Models.PetModel>().ReverseMap();
             CreateMap<AddNewPetViewModel, Domain.Models.Pet>().ReverseMap();
             CreateMap<Toy, ToyModel>().ReverseMap();
+            CreateMap<Toy, ToyViewModel>().ReverseMap();
+            CreateMap<Access, AccessViewModel>().ReverseMap();
+            CreateMap<Access, AccessModel>().ReverseMap();
         }
     }
 }
