@@ -31,6 +31,7 @@ namespace PetPlayBackend.Controllers
             try
             {
                 var result = await _userService.GetAllUsers();
+
                 return Ok(result);
             }
             catch (Exception ex)

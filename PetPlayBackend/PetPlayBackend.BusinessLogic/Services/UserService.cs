@@ -90,7 +90,8 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var result = await _context.Users.Include(x => x.Pets).Include(x => x.Accesses).FirstOrDefaultAsync(x => x.Id == id);
+                var result = await _context.Users.Include(x => x.Pets).Include(x => x.Accesses).ThenInclude(x => x.Toy)
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
                 if (result == null)
                 {

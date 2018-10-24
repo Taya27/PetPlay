@@ -11,6 +11,7 @@ namespace PetPlayBackend.Domain.Contexts
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Toy> Toys { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Access> Accesses { get; set; }
 
         public ApplicationDbContext()
         {

@@ -12,10 +12,11 @@ export class MyPetsComponent implements OnInit {
   pets: PetModel[] = [];
   dataSource = new MatTableDataSource();
   userId: string = "";
-  displayedColumns: string[] = ['nickname', 'breed', 'delete'];
+  displayedColumns: string[] = ['nickname', 'breed', 'kind', 'delete'];
 
   nickname: string = "";
   breed: string = "";
+  kind: string = "";
 
   constructor(
     public dialogRef: MatDialogRef<MyPetsComponent>,
@@ -34,6 +35,7 @@ export class MyPetsComponent implements OnInit {
     const model = {
       nickname: this.nickname,
       breed: this.breed,
+      kind: this.kind,
       userId: this.userId
     } as AddNewPetViewModel;
 

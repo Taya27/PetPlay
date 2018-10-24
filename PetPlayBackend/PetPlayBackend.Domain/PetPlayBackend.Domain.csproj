@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20181022191820_added-pets.cs" />
+    <Compile Remove="Migrations\20181024171950_update-database.cs" />
   </ItemGroup>
 
   <ItemGroup>

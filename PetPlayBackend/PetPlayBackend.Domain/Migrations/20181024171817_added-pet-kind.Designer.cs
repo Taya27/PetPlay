@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetPlayBackend.Domain.Contexts;
 
 namespace PetPlayBackend.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181024171817_added-pet-kind")]
+    partial class addedpetkind
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace PetPlayBackend.Domain.Migrations
 
                     b.HasIndex("ToyId");
 
-                    b.ToTable("Accesses");
+                    b.ToTable("Access");
                 });
 
             modelBuilder.Entity("PetPlayBackend.Domain.Models.Pet", b =>
