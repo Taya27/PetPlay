@@ -70,6 +70,30 @@ namespace PetPlayBackend.Controllers
             }
         }
 
+        [HttpGet("get-user-granted-toys/{userId}")]
+        [AllowAnonymous] // CHANGE
+        [ProducesResponseType(typeof(IEnumerable<GrantedToyViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUserGrantedToys(Guid userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _accessService.GetUserGrantedToys(userId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("get-access-by-user-id-and-toy-id/{userId}/{toyId}")]
         [AllowAnonymous] // CHANGE
         [ProducesResponseType(typeof(AccessModel), StatusCodes.Status200OK)]

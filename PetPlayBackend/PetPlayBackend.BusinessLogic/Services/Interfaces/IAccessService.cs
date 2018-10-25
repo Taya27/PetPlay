@@ -14,5 +14,7 @@ namespace PetPlayBackend.BusinessLogic.Services.Interfaces
         Task<IEnumerable<AccessModel>> GetUsersAccessesById(Guid userId);
 
         Task<AccessModel> GetAccessByUserIdAndToyId(Guid userId, Guid toyId);
+
+        Task<IEnumerable<GrantedToyViewModel>> GetUserGrantedToys(Guid userId);
     }
 }

@@ -1,3 +1,17 @@
 table {
     width: 80%;
 }
+
+tr.element-row:hover {
+    cursor: pointer;
+    background: #4189C7;
+  }
+  
+  tr.element-row:active {
+    background: #efefef;
+  }
+  
+  .selected {
+    background-color: #4189C7;
+    color: white;
+  }

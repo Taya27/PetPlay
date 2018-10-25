@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatTableDataSource, MatDialog } from '@angular/material';
-import { PetPlayService, ToyModel } from 'src/app/services/petplay.service';
+import { PetPlayService, ToyModel, AccessModel, GrantedToyViewModel } from 'src/app/services/petplay.service';
 import { RegisterToyDialogComponent } from '../dialogs/register-toy-dialog/register-toy-dialog.component';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-my-toys',
@@ -10,10 +11,24 @@ import { RegisterToyDialogComponent } from '../dialogs/register-toy-dialog/regis
   styleUrls: ['./my-toys.component.css']
 })
 export class MyToysComponent implements OnInit {
-  dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'model'];
-  userToys: ToyModel[] = [];
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.selectedToy = undefined;
+    }
+  }
+
+  myOwnToysSource = new MatTableDataSource();
+  displayedOwnToysColumns: string[] = ['id', 'model'];
+
+  myGrantedAccessesSource = new MatTableDataSource();
+  displayedGrantedAccessesColumns: string[] = ['model', 'friendName'];
   
+  ownUserToys: ToyModel[] = [];
+  grantedUserAccesses: GrantedToyViewModel[] = [];
+  selectedToy: ToyModel;
+
   constructor(private authService: AuthService,
     private petPlayService: PetPlayService,
     private dialog: MatDialog) {
@@ -23,12 +38,20 @@ export class MyToysComponent implements OnInit {
     this.petPlayService.apiAccessGetUserAccessesByUserIdGet(this.authService.getUserId())
       .subscribe(result => {
         for (let access of result) {
-          this.userToys.push(access.toy)
+          if (access.isOwner)
+            this.ownUserToys.push(access.toy);
         }
-        this.dataSource.data = this.userToys;
+        this.myOwnToysSource.data = this.ownUserToys;
       }, error => {
         alert("An error occured!")
       });
+    
+    this.petPlayService.apiAccessGetUserGrantedToysByUserIdGet(this.authService.getUserId())
+      .subscribe(result => {
+        this.grantedUserAccesses = result;
+        this.myGrantedAccessesSource.data = this.grantedUserAccesses;
+      });
+      
   }
 
   openToyRegister = () => {
@@ -36,14 +59,23 @@ export class MyToysComponent implements OnInit {
       width: '500px',
       data: {
         userId: this.authService.getUserId(),
-        userToys: this.userToys
+        userToys: this.ownUserToys
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.userToys.push(result);
-      this.dataSource._updateChangeSubscription();
+      if (result) {
+        this.ownUserToys.push(result);
+        this.myOwnToysSource._updateChangeSubscription();
+      }
     });
   }
 
+  selectToy = (toy) => {
+    this.selectedToy = toy;
+  }
+
+  selectGrantedToy = (grantedModel) => {
+    this.selectedToy = grantedModel.toy;
+  }
 }
