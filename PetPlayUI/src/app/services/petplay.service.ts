@@ -160,6 +160,72 @@ export class PetPlayService {
     /**
      * @return Success
      */
+    apiAccessGetUserGrantedToysByUserIdGet(userId: string): Observable<GrantedToyViewModel[]> {
+        let url_ = this.baseUrl + "/api/Access/get-user-granted-toys/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiAccessGetUserGrantedToysByUserIdGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiAccessGetUserGrantedToysByUserIdGet(<any>response_);
+                } catch (e) {
+                    return <Observable<GrantedToyViewModel[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GrantedToyViewModel[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiAccessGetUserGrantedToysByUserIdGet(response: HttpResponseBase): Observable<GrantedToyViewModel[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <GrantedToyViewModel[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GrantedToyViewModel[]>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
     apiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(userId: string, toyId: string): Observable<AccessModel> {
         let url_ = this.baseUrl + "/api/Access/get-access-by-user-id-and-toy-id/{userId}/{toyId}";
         if (userId === undefined || userId === null)
@@ -725,6 +791,11 @@ export interface PetModel {
     breed?: string | undefined;
     kind?: string | undefined;
     userModel?: UserModel | undefined;
+}
+
+export interface GrantedToyViewModel {
+    toy?: ToyModel | undefined;
+    user?: UserModel | undefined;
 }
 
 export interface RegistrationViewModel {

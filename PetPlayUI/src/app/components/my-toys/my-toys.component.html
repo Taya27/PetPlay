@@ -1,5 +1,11 @@
 <h2>My toys</h2>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<ng-template #noUserToys>
+  You don't have your own toys!<br/> Buy a new one and then
+</ng-template>
+<table mat-table 
+       [dataSource]="myOwnToysSource"
+       class="mat-elevation-z8"
+       *ngIf="ownUserToys.length != 0; else noUserToys">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Id </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -10,7 +16,38 @@
     <td mat-cell *matCellDef="let element"> {{element.model}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedOwnToysColumns"></tr>
+  <tr class="element-row" 
+      mat-row 
+      *matRowDef="let row; columns: displayedOwnToysColumns;" 
+      [(class.selected)]="row === selectedToy"
+      (click)="selectToy(row)"></tr>
 </table>
 <button mat-stroked-button color="primary" (click)="openToyRegister()" style="margin-top: 10px">Register new toy</button>
+
+<h2 style="margin-top: 10px">My granted toys</h2>
+<ng-template #noGrantedToys>
+  You don't have granted toys! Ask your friends an access.
+</ng-template>
+<table mat-table 
+      [dataSource]="myGrantedAccessesSource"
+      class="mat-elevation-z8"
+      *ngIf="grantedUserAccesses.length != 0; else noGrantedToys">
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> Toy model </th>
+    <td mat-cell *matCellDef="let element"> {{element.toy.model}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="friendName">
+    <th mat-header-cell *matHeaderCellDef> Friend's name </th>
+    <td mat-cell *matCellDef="let element"> {{element.user?.firstName}} {{element.user?.lastName}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedGrantedAccessesColumns"></tr>
+  <tr class="element-row" 
+      mat-row 
+      *matRowDef="let row; columns: displayedGrantedAccessesColumns;" 
+      [(class.selected)]="row.toy === selectedToy"
+      (click)="selectGrantedToy(row)"></tr>
+</table>
+<button mat-raised-button color="accent" class="" style="margin-top: 10px">Connect to toy</button>

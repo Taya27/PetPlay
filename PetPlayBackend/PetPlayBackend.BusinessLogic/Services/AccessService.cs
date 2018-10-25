@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -28,6 +29,15 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
+                //var alreadyOwned =
+                //    await _context.Accesses
+                //        .FirstOrDefaultAsync(x => x.ToyId == model.ToyId && x.IsOwner == model.IsOwner);
+
+                //if (alreadyOwned != null)
+                //{
+                //    throw new Exception("This toy is already owned by someone");
+                //} FAILS WHEN GIVING ACCESS TO SECOND FRIEND
+
                 await _context.Accesses.AddAsync(_mapper.Map<Access>(model));
                 await _context.SaveChangesAsync();
             }
@@ -43,11 +53,44 @@ namespace PetPlayBackend.BusinessLogic.Services
             {
                 var result = await _context.Accesses
                     .Include(x => x.Toy)
+                    .Include(x => x.User)
                     .Where(x => x.UserId == userId)
                     .Select(x => _mapper.Map<AccessModel>(x))
                     .ToListAsync();
 
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<GrantedToyViewModel>> GetUserGrantedToys(Guid userId)
+        {
+            try
+            {
+                var result = await _context.Accesses
+                    .Include(x => x.Toy)
+                    .Where(x => x.UserId == userId && !x.IsOwner)
+                    .ToListAsync();
+
+                var res = await _context.Accesses
+                    .Include(x => x.User)
+                    .Where(x => x.IsOwner)
+                    .ToListAsync();
+
+
+                return res.Join(
+                    result,
+                    x => x.ToyId,
+                    y => y.ToyId,
+                    (a, b) => new GrantedToyViewModel
+                        {
+                            User = _mapper.Map<UserModel>(a.User),
+                            Toy = _mapper.Map<ToyModel>(b.Toy)
+                        }
+                    );
             }
             catch (Exception ex)
             {

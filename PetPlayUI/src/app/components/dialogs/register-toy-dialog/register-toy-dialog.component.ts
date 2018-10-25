@@ -36,6 +36,6 @@ export class RegisterToyDialogComponent implements OnInit {
             this.dialogRef.close(result.toy);
           });
       }
-    })
+    }, error => alert(error))
   }
 }
