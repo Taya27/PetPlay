@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181022191820_added-pets.cs" />
     <Compile Remove="Migrations\20181024171950_update-database.cs" />
+    <Compile Remove="Migrations\20181027130817_added-connection.cs" />
+    <Compile Remove="Migrations\20181027135407_added-guid-auto-generation.cs" />
+    <Compile Remove="Migrations\20181027140156_added-guid-auto-generation1.cs" />
+    <Compile Remove="Migrations\20181027140345_added-guid-auto-generation1.cs" />
+    <Compile Remove="Migrations\20181027140428_added-guid-auto-generation1.cs" />
+    <Compile Remove="Migrations\20181027144805_fixed-connection-primary-key.cs" />
   </ItemGroup>
 
   <ItemGroup>

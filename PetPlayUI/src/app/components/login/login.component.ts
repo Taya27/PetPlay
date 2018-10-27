@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PetPlayService, LoginViewModel } from 'src/app/services/petplay.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   public login: string = "";
   public password: string = "";
+  errorText: string = "";
 
   constructor(private authService: AuthService,
     private router: Router) { }
@@ -18,7 +19,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.logIn();
+    }
+  }
+
   logIn = () => {
+    if (!this.login || !this.password) {
+      this.errorText = "Fill all fields, please";
+      return;
+    }
+
+    this.errorText = "";
     const loginModel = {
       login: this.login,
       password: this.password
@@ -28,7 +42,7 @@ export class LoginComponent implements OnInit {
       if (result) {
         this.router.navigateByUrl('/profile');
       }
-    });
+    }, error => this.errorText = "Invalid password or user");
   }
 
   navigateToRegister = () => {

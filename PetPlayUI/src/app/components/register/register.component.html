@@ -23,5 +23,7 @@
     <input matInput placeholder="Last name" [(ngModel)]="lastName">
   </mat-form-field>
 
+  <p style="color: red; font-size: 14pt" *ngIf="errorText">{{errorText}}</p>
+
   <button mat-raised-button color="primary" (click)="register()">Register</button>
 </div>

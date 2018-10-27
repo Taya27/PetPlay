@@ -14,5 +14,6 @@ namespace PetPlayBackend.BusinessLogic.Models
 
         public List<AccessModel> Accesses { get; set; }
         public List<PetModel> Pets { get; set; }
+        public List<ConnectionModel> Connections { get; set; }
     }
 }

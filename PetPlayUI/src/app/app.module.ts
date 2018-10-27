@@ -12,6 +12,12 @@ import { MatExpansionModule}  from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { AppComponent } from './app.component';
 import { PetPlayService, API_BASE_URL } from './services/petplay.service';
@@ -37,6 +43,11 @@ import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete
 import { MyFriendsComponent } from './components/my-friends/my-friends.component';
 import { MyToysComponent } from './components/my-toys/my-toys.component';
 import { RegisterToyDialogComponent } from './components/dialogs/register-toy-dialog/register-toy-dialog.component';
+import { ToyConnectAdviceComponent } from './components/dialogs/toy-connect-advice/toy-connect-advice.component';
+import { DeleteFriendGrantsComponent } from './components/dialogs/delete-friend-grants/delete-friend-grants.component';
+import { ToyConnectionComponent } from './components/toy-connection/toy-connection.component';
+import { SelectToyToShareComponent } from './components/dialogs/select-toy-to-share/select-toy-to-share.component';
+import { DeleteToyComponent } from './components/dialogs/delete-toy/delete-toy.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +65,12 @@ import { RegisterToyDialogComponent } from './components/dialogs/register-toy-di
     DeleteDialogComponent,
     MyFriendsComponent,
     MyToysComponent,
-    RegisterToyDialogComponent
+    RegisterToyDialogComponent,
+    ToyConnectAdviceComponent,
+    DeleteFriendGrantsComponent,
+    ToyConnectionComponent,
+    SelectToyToShareComponent,
+    DeleteToyComponent
   ],
   imports: [
     HttpClientModule,
@@ -73,7 +89,13 @@ import { RegisterToyDialogComponent } from './components/dialogs/register-toy-di
     MatCardModule,
     MatDialogModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatChipsModule
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.API_BASE_URL},
@@ -92,7 +114,11 @@ import { RegisterToyDialogComponent } from './components/dialogs/register-toy-di
     SnackBarComponent,
     MyPetsComponent,
     RegisterToyDialogComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ToyConnectAdviceComponent,
+    DeleteFriendGrantsComponent,
+    SelectToyToShareComponent,
+    DeleteToyComponent
   ]
 })
 export class AppModule { }

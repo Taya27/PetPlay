@@ -34,7 +34,7 @@ namespace PetPlayBackend.BusinessLogic.Services
 
                 if (incorrectEmailOrUserName)
                 {
-                    throw new Exception("UserModel already exists!   ");
+                    throw new Exception("This user already registered");
                 }
 
                 var userModel = _mapper.Map<Domain.Models.User>(model);
@@ -77,8 +77,9 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var result = _context.Users.Include(x => x.Pets).Select(x => _mapper.Map<Models.UserModel>(x));
-                return result;
+                var result = await _context.Users.Include(x => x.Pets).ToListAsync();
+
+                return result.Select(x => _mapper.Map<Models.UserModel>(x));
             }
             catch (Exception ex)
             {

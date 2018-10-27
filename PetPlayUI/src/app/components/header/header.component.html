@@ -1,13 +1,12 @@
-<div id="header">
+<!--<div id="header">
   <div class="container">
   
-    <!-- Logo -->
+
       <div id="logo">
-         <!-- <img src="images/logoBig.jpg" height="70">-->
+         <img src="images/logoBig.jpg" height="70">
          <h1><a href="#">PetPlay</a></h1>
       </div>
       
-    <!-- Nav -->	
     <nav id="nav">
       <ul>
         <li><a [routerLink]='["/main"]'>Главная</a></li>
@@ -18,4 +17,78 @@
       </ul>
     </nav>
   </div>
-</div>
+</div>-->
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;">
+  <mat-divider></mat-divider>
+  <div fxShow="true" fxHide.lt-md="true" >
+    <mat-toolbar class="basic" color="basic" fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-nav-list style="margin: auto">
+        <button mat-raised-button routerLink='/main' routerLinkActive="active">
+          <mat-icon>home</mat-icon><br />HOME
+        </button>
+
+        <button mat-raised-button>
+          <mat-icon>help_outline</mat-icon><br />ABOUT US
+        </button>
+
+        <button mat-raised-button routerLink='/contacts' routerLinkActive='active'>
+          <mat-icon>account_box</mat-icon><br />CONTACTS
+        </button>
+
+        <button mat-raised-button routerLink="/toy-connection" *ngIf="authService.isUserLogined()">
+          <mat-icon>cast_connected</mat-icon><br />TOY CONNECTION
+        </button>
+
+        <button mat-raised-button routerLink="/login">
+          <mat-icon>assignment</mat-icon><br />MY ACCOUNT
+        </button>
+
+        <button mat-raised-button *ngIf="authService.isUserLogined()" (click)="logOut()">
+          <mat-icon>exit_to_app</mat-icon><br />LOG OUT
+        </button>
+      </mat-nav-list>
+    </mat-toolbar>
+  </div>
+  <div>
+    <mat-sidenav-container fxFlexFill class="example-container">
+      <mat-sidenav #sidenav fxLayout="column">
+        <div fxLayout="column" fxLayoutAlign="center start">
+          <mat-nav-list>
+
+            <a mat-list-item routerLink='Espace/home' routerLinkActive="active">
+              <mat-icon style="-webkit-text-fill-color:deeppink;">home</mat-icon>
+              <p class="tabs">HOME<p>
+            </a>
+
+            <a mat-list-item routerLink='Espace/SpaceSurvey' routerLinkActive='active'>
+              <mat-icon style="-webkit-text-fill-color:deeppink; ">explore</mat-icon>
+              <p class="tabs">SPACE SURVEY</p>
+            </a>
+
+            <a mat-list-item routerLink='Espace/home' routerLinkActive="active">
+              <mat-icon style="-webkit-text-fill-color:deeppink;">account_box</mat-icon>
+              <p class="tabs">SPACE ADMIN</p>
+            </a>
+
+            <a mat-list-item routerLink='Espace/SpaceSurvey' routerLinkActive='active'>
+              <mat-icon style="-webkit-text-fill-color:deeppink; ">assignment</mat-icon>
+              <p class="tabs">REPORTS</p>
+            </a>
+
+            <a mat-list-item routerLink='Espace/home' routerLinkActive="active">
+              <mat-icon style="-webkit-text-fill-color:deeppink;">supervisor_account</mat-icon>
+              <p class="tabs">JOINT USE</p>
+            </a>
+
+            <a mat-list-item routerLink='Espace/SpaceSurvey' routerLinkActive='active'>
+              <mat-icon style="-webkit-text-fill-color:deeppink; ">help_outline</mat-icon>
+              <p class="tabs">HELP</p>
+            </a>
+
+          </mat-nav-list>
+        </div>
+      </mat-sidenav>
+      <div style="overflow: auto;  position: absolute;  bottom:0;  left:0;  right:0;  top:64px;">
+        <div style="padding-top:2em;padding-bottom:2em;"></div>
+      </div>
+</mat-sidenav-container>

@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using PetPlayBackend.BusinessLogic.Services.Interfaces;
 using PetPlayBackend.BusinessLogic.Services;
 using PetPlayBackend.BusinessLogic.Common.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PetPlayBackend
 {
@@ -43,6 +43,28 @@ namespace PetPlayBackend
 
             services.AddScoped<IAccessService, AccessService>();
 
+            services.AddScoped<IConnectionService, ConnectionService>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(configureOptions =>
+            {
+                configureOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtSettings.ValidIssuer,
+
+                    ValidateAudience = true,
+                    ValidAudience = jwtSettings.ValidAudience,
+
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtSettings.IssuerSigningKey)),
+                    ValidateLifetime = false
+                };
+            });
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info() { Title = "PetPlay API", Version = "v1" });
@@ -52,19 +74,21 @@ namespace PetPlayBackend
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(options => {
+                .AddJsonOptions(options =>
+                {
                     options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    });
+                });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseCors(builder =>
                    builder.AllowAnyOrigin()

@@ -1,6 +1,6 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="User" aria-label="User" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <input type="text" placeholder="Start typing your friend's nickname" aria-label="User" matInput [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
         @{{option.nickname}}
@@ -8,4 +8,38 @@
     </mat-autocomplete>
   </mat-form-field>
 </form>
-<button (click)="test()">Click</button>
+<mat-chip-list>
+  <mat-chip color="accent" selected style="cursor: pointer" (click)="selectToy()">{{optionToShow}}</mat-chip>
+  <button mat-raised-button color="warn" style="background-color: green; margin-left: 5px" (click)="share()">Share toy</button>
+</mat-chip-list>
+<p style="color: red; font-size: 14pt" *ngIf="shareToyError">{{shareToyError}}</p>
+
+
+<h2>My toys grants to friends</h2>
+<table mat-table 
+       [dataSource]="myToysGrants"
+       class="mat-elevation-z8"
+       *ngIf="toysGrants.length != 0">
+  <ng-container matColumnDef="toyModel">
+    <th mat-header-cell *matHeaderCellDef> Toy model </th>
+    <td mat-cell *matCellDef="let element"> {{element.toy.model}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="friendName">
+    <th mat-header-cell *matHeaderCellDef> Friend's name </th>
+    <td mat-cell *matCellDef="let element"> {{element.user.firstName}} {{element.user.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" style="cursor: pointer"> 
+      <i class="material-icons" style="margin-top: 8px" (click)="deleteAccess(element.toy, element.user)">clear</i> 
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedToysGrantsColumns"></tr>
+  <tr class="element-row" 
+      mat-row 
+      *matRowDef="let row; columns: displayedToysGrantsColumns;">
+  </tr>
+</table>

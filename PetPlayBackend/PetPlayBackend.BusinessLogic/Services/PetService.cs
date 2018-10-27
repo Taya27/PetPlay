@@ -27,9 +27,9 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var pets = _context.Pets.Select(x => _mapper.Map<PetModel>(x));
+                var pets = await _context.Pets.ToListAsync();
 
-                return pets;
+                return pets.Select(x => _mapper.Map<PetModel>(x));
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace PetPlayBackend.BusinessLogic.Services
 
                 await _context.SaveChangesAsync();
 
-                return _mapper.Map<Models.PetModel>(dbModel);
+                return _mapper.Map<PetModel>(dbModel);
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace PetPlayBackend.BusinessLogic.Services
                 _context.Pets.Remove(petToDelete);
                 await _context.SaveChangesAsync();
 
-                return _mapper.Map<Models.PetModel>(petToDelete);
+                return _mapper.Map<PetModel>(petToDelete);
             }
             catch (Exception ex)
             {

@@ -49,8 +49,8 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPost("login")]
-        [AllowAnonymous]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [AllowAnonymous] // CHANGE
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
@@ -64,15 +64,15 @@ namespace PetPlayBackend.Controllers
             try
             {
                 result = await _userService.FindUser(model);
+
+                var jwtToken = _tokenService.BuildToken(result.Id);
+
+                return Ok(new { auth_token = jwtToken, user_id = result.Id });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
-            var jwtToken = _tokenService.BuildToken(result.Id);
-
-            return Ok(new {auth_token = jwtToken, user_id = result.Id});
         }
     }
 }

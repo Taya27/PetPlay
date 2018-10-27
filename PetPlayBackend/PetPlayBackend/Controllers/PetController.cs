@@ -23,7 +23,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPost("add-pet")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(BusinessLogic.Models.PetModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -47,7 +47,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpDelete("delete-pet/{petId}")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(PetModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]

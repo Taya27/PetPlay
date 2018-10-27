@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PetPlayBackend.BusinessLogic.Models;
 using PetPlayBackend.BusinessLogic.Services.Interfaces;
 using PetPlayBackend.BusinessLogic.ViewModels;
 
@@ -38,6 +39,30 @@ namespace PetPlayBackend.Controllers
                 await _toyService.AddNewToy(model);
 
                 return Ok("New toy was added!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get-all-toys")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<ToyModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllToys()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _toyService.GetAllToys();
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

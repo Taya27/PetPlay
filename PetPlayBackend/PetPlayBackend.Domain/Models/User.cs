@@ -16,8 +16,11 @@ namespace PetPlayBackend.Domain.Models
         public virtual List<Access> Accesses { get; set; }
         public virtual List<Pet> Pets { get; set; }
 
+        public virtual List<Connection> Connections { get; set; }
+
         public User()
         {
+            Connections = new List<Connection>();
             Accesses = new List<Access>();
             Pets = new List<Pet>();
         }

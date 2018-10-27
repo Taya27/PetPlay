@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   firstName: string;
   lastName: string;
 
+  errorText: string = "";
+
   constructor(private authService: AuthService,
     private snackBar: MatSnackBar) { }
 
@@ -24,6 +26,22 @@ export class RegisterComponent implements OnInit {
   }
 
   register = () => {
+    if (!this.email ||
+        !this.password ||
+        !this.nickname ||
+        !this.firstName ||
+        !this.lastName) {
+          this.errorText = "Fill all fields please";
+          return;
+        }
+
+    if (this.password !== this.confirmPassword) {
+      this.errorText = "Passwords do not match";
+      return;
+    }
+
+    this.errorText = "";
+
     const model = {
       email: this.email,
       password: this.password,
@@ -34,9 +52,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(model).subscribe(_ => {
       this.openSnackBar();
-    }, error => {
-      alert("An error occured!");
-    });
+    }, error => { this.errorText = error });
   }
 
   openSnackBar(): void {

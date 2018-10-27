@@ -11,7 +11,7 @@ using PetPlayBackend.BusinessLogic.ViewModels;
 
 namespace PetPlayBackend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/accesses")]
     [ApiController]
     public class AccessController : ControllerBase
     {
@@ -94,6 +94,30 @@ namespace PetPlayBackend.Controllers
             }
         }
 
+        [HttpGet("get-user-toy-grants/{userId}")]
+        [AllowAnonymous] // CHANGE
+        [ProducesResponseType(typeof(IEnumerable<GrantedToyViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUserToyGrants(Guid userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _accessService.GetUserToyGrants(userId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("get-access-by-user-id-and-toy-id/{userId}/{toyId}")]
         [AllowAnonymous] // CHANGE
         [ProducesResponseType(typeof(AccessModel), StatusCodes.Status200OK)]
@@ -111,6 +135,30 @@ namespace PetPlayBackend.Controllers
                 var result = await _accessService.GetAccessByUserIdAndToyId(userId, toyId);
 
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete-access-by-user-id-and-toy-id/{userId}/{toyId}")]
+        [AllowAnonymous] // CHANGE
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteAccessByUserIdAndToyId(Guid userId, Guid toyId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _accessService.DeleteAccessByUserIdAndToyId(userId, toyId);
+
+                return NoContent();
             }
             catch (Exception ex)
             {
