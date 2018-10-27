@@ -28,8 +28,8 @@ export class PetPlayService {
      * @param model (optional) 
      * @return Success
      */
-    apiAccessAddAccessPost(model: AccessViewModel | null | undefined): Observable<any> {
-        let url_ = this.baseUrl + "/api/Access/add-access";
+    apiAccessesAddAccessPost(model: AccessViewModel | null | undefined): Observable<any> {
+        let url_ = this.baseUrl + "/api/accesses/add-access";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
@@ -45,11 +45,11 @@ export class PetPlayService {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processApiAccessAddAccessPost(response_);
+            return this.processApiAccessesAddAccessPost(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processApiAccessAddAccessPost(<any>response_);
+                    return this.processApiAccessesAddAccessPost(<any>response_);
                 } catch (e) {
                     return <Observable<any>><any>_observableThrow(e);
                 }
@@ -58,7 +58,7 @@ export class PetPlayService {
         }));
     }
 
-    protected processApiAccessAddAccessPost(response: HttpResponseBase): Observable<any> {
+    protected processApiAccessesAddAccessPost(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -94,8 +94,8 @@ export class PetPlayService {
     /**
      * @return Success
      */
-    apiAccessGetUserAccessesByUserIdGet(userId: string): Observable<AccessModel[]> {
-        let url_ = this.baseUrl + "/api/Access/get-user-accesses/{userId}";
+    apiAccessesGetUserAccessesByUserIdGet(userId: string): Observable<AccessModel[]> {
+        let url_ = this.baseUrl + "/api/accesses/get-user-accesses/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
         url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
@@ -111,11 +111,11 @@ export class PetPlayService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processApiAccessGetUserAccessesByUserIdGet(response_);
+            return this.processApiAccessesGetUserAccessesByUserIdGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processApiAccessGetUserAccessesByUserIdGet(<any>response_);
+                    return this.processApiAccessesGetUserAccessesByUserIdGet(<any>response_);
                 } catch (e) {
                     return <Observable<AccessModel[]>><any>_observableThrow(e);
                 }
@@ -124,7 +124,7 @@ export class PetPlayService {
         }));
     }
 
-    protected processApiAccessGetUserAccessesByUserIdGet(response: HttpResponseBase): Observable<AccessModel[]> {
+    protected processApiAccessesGetUserAccessesByUserIdGet(response: HttpResponseBase): Observable<AccessModel[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -160,8 +160,8 @@ export class PetPlayService {
     /**
      * @return Success
      */
-    apiAccessGetUserGrantedToysByUserIdGet(userId: string): Observable<GrantedToyViewModel[]> {
-        let url_ = this.baseUrl + "/api/Access/get-user-granted-toys/{userId}";
+    apiAccessesGetUserGrantedToysByUserIdGet(userId: string): Observable<GrantedToyViewModel[]> {
+        let url_ = this.baseUrl + "/api/accesses/get-user-granted-toys/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
         url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
@@ -177,11 +177,11 @@ export class PetPlayService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processApiAccessGetUserGrantedToysByUserIdGet(response_);
+            return this.processApiAccessesGetUserGrantedToysByUserIdGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processApiAccessGetUserGrantedToysByUserIdGet(<any>response_);
+                    return this.processApiAccessesGetUserGrantedToysByUserIdGet(<any>response_);
                 } catch (e) {
                     return <Observable<GrantedToyViewModel[]>><any>_observableThrow(e);
                 }
@@ -190,7 +190,7 @@ export class PetPlayService {
         }));
     }
 
-    protected processApiAccessGetUserGrantedToysByUserIdGet(response: HttpResponseBase): Observable<GrantedToyViewModel[]> {
+    protected processApiAccessesGetUserGrantedToysByUserIdGet(response: HttpResponseBase): Observable<GrantedToyViewModel[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -226,8 +226,74 @@ export class PetPlayService {
     /**
      * @return Success
      */
-    apiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(userId: string, toyId: string): Observable<AccessModel> {
-        let url_ = this.baseUrl + "/api/Access/get-access-by-user-id-and-toy-id/{userId}/{toyId}";
+    apiAccessesGetUserToyGrantsByUserIdGet(userId: string): Observable<GrantedToyViewModel[]> {
+        let url_ = this.baseUrl + "/api/accesses/get-user-toy-grants/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiAccessesGetUserToyGrantsByUserIdGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiAccessesGetUserToyGrantsByUserIdGet(<any>response_);
+                } catch (e) {
+                    return <Observable<GrantedToyViewModel[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GrantedToyViewModel[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiAccessesGetUserToyGrantsByUserIdGet(response: HttpResponseBase): Observable<GrantedToyViewModel[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <GrantedToyViewModel[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GrantedToyViewModel[]>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    apiAccessesGetAccessByUserIdAndToyIdByUserIdByToyIdGet(userId: string, toyId: string): Observable<AccessModel> {
+        let url_ = this.baseUrl + "/api/accesses/get-access-by-user-id-and-toy-id/{userId}/{toyId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
         url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
@@ -246,11 +312,11 @@ export class PetPlayService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processApiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(response_);
+            return this.processApiAccessesGetAccessByUserIdAndToyIdByUserIdByToyIdGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processApiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(<any>response_);
+                    return this.processApiAccessesGetAccessByUserIdAndToyIdByUserIdByToyIdGet(<any>response_);
                 } catch (e) {
                     return <Observable<AccessModel>><any>_observableThrow(e);
                 }
@@ -259,7 +325,7 @@ export class PetPlayService {
         }));
     }
 
-    protected processApiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(response: HttpResponseBase): Observable<AccessModel> {
+    protected processApiAccessesGetAccessByUserIdAndToyIdByUserIdByToyIdGet(response: HttpResponseBase): Observable<AccessModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -290,6 +356,75 @@ export class PetPlayService {
             }));
         }
         return _observableOf<AccessModel>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    apiAccessesDeleteAccessByUserIdAndToyIdByUserIdByToyIdDelete(userId: string, toyId: string): Observable<any> {
+        let url_ = this.baseUrl + "/api/accesses/delete-access-by-user-id-and-toy-id/{userId}/{toyId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        if (toyId === undefined || toyId === null)
+            throw new Error("The parameter 'toyId' must be defined.");
+        url_ = url_.replace("{toyId}", encodeURIComponent("" + toyId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiAccessesDeleteAccessByUserIdAndToyIdByUserIdByToyIdDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiAccessesDeleteAccessByUserIdAndToyIdByUserIdByToyIdDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<any>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<any>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiAccessesDeleteAccessByUserIdAndToyIdByUserIdByToyIdDelete(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result204: any = null;
+            result204 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result204);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<any>(<any>null);
     }
 
     /**
@@ -363,7 +498,7 @@ export class PetPlayService {
      * @param model (optional) 
      * @return Success
      */
-    apiAuthLoginPost(model: LoginViewModel | null | undefined): Observable<string> {
+    apiAuthLoginPost(model: LoginViewModel | null | undefined): Observable<any> {
         let url_ = this.baseUrl + "/api/auth/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -386,14 +521,14 @@ export class PetPlayService {
                 try {
                     return this.processApiAuthLoginPost(<any>response_);
                 } catch (e) {
-                    return <Observable<string>><any>_observableThrow(e);
+                    return <Observable<any>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<string>><any>_observableThrow(response_);
+                return <Observable<any>><any>_observableThrow(response_);
         }));
     }
 
-    protected processApiAuthLoginPost(response: HttpResponseBase): Observable<string> {
+    protected processApiAuthLoginPost(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -403,7 +538,7 @@ export class PetPlayService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <string>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -423,7 +558,206 @@ export class PetPlayService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<string>(<any>null);
+        return _observableOf<any>(<any>null);
+    }
+
+    /**
+     * @param model (optional) 
+     * @return Success
+     */
+    apiConnectionsAddConnectionPost(model: ConnectionModel | null | undefined): Observable<ConnectionModel> {
+        let url_ = this.baseUrl + "/api/connections/add-connection";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(model);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiConnectionsAddConnectionPost(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiConnectionsAddConnectionPost(<any>response_);
+                } catch (e) {
+                    return <Observable<ConnectionModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ConnectionModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiConnectionsAddConnectionPost(response: HttpResponseBase): Observable<ConnectionModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ConnectionModel>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ConnectionModel>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    apiConnectionsGetUserConnectionByUserIdGet(userId: string): Observable<ConnectionModel> {
+        let url_ = this.baseUrl + "/api/connections/get-user-connection/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiConnectionsGetUserConnectionByUserIdGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiConnectionsGetUserConnectionByUserIdGet(<any>response_);
+                } catch (e) {
+                    return <Observable<ConnectionModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ConnectionModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiConnectionsGetUserConnectionByUserIdGet(response: HttpResponseBase): Observable<ConnectionModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ConnectionModel>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ConnectionModel>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    apiConnectionsDisconnectByToyIdPut(toyId: string): Observable<any> {
+        let url_ = this.baseUrl + "/api/connections/disconnect/{toyId}";
+        if (toyId === undefined || toyId === null)
+            throw new Error("The parameter 'toyId' must be defined.");
+        url_ = url_.replace("{toyId}", encodeURIComponent("" + toyId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiConnectionsDisconnectByToyIdPut(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiConnectionsDisconnectByToyIdPut(<any>response_);
+                } catch (e) {
+                    return <Observable<any>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<any>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiConnectionsDisconnectByToyIdPut(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result204: any = null;
+            result204 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result204);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<any>(<any>null);
     }
 
     /**
@@ -629,6 +963,69 @@ export class PetPlayService {
     /**
      * @return Success
      */
+    apiToysGetAllToysGet(): Observable<ToyModel[]> {
+        let url_ = this.baseUrl + "/api/toys/get-all-toys";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiToysGetAllToysGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiToysGetAllToysGet(<any>response_);
+                } catch (e) {
+                    return <Observable<ToyModel[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ToyModel[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiToysGetAllToysGet(response: HttpResponseBase): Observable<ToyModel[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ToyModel[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ToyModel[]>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
     apiUsersGetAllUsersGet(): Observable<UserModel[]> {
         let url_ = this.baseUrl + "/api/users/get-all-users";
         url_ = url_.replace(/[?&]$/, "");
@@ -778,11 +1175,13 @@ export interface UserModel {
     nickname?: string | undefined;
     accesses?: AccessModel[] | undefined;
     pets?: PetModel[] | undefined;
+    connections?: ConnectionModel[] | undefined;
 }
 
 export interface ToyModel {
     id?: string | undefined;
     model?: string | undefined;
+    connections?: ConnectionModel[] | undefined;
 }
 
 export interface PetModel {
@@ -791,6 +1190,16 @@ export interface PetModel {
     breed?: string | undefined;
     kind?: string | undefined;
     userModel?: UserModel | undefined;
+}
+
+export interface ConnectionModel {
+    id?: string | undefined;
+    startTime?: Date | undefined;
+    endTime?: Date | undefined;
+    toyId?: string | undefined;
+    toy?: ToyModel | undefined;
+    userId?: string | undefined;
+    user?: UserModel | undefined;
 }
 
 export interface GrantedToyViewModel {

@@ -1,0 +1,11 @@
+<div class="cont">
+  <h2 style="margin: auto">Toy connection</h2>
+  <p *ngIf="currentConnection; else notConnected">
+    You are now connected to {{ currentConnection.toy.model }} ({{currentConnection.toyId}})
+      <br/><button mat-raised-button color="warn" style="margin-top: 10px" (click)="disconnect()">Disconnect</button>
+  </p>
+  
+  <ng-template #notConnected>
+    <p>You are currently not connected to any toy. But you can do it in your <a [routerLink]='["/profile"]'>personal account</a></p>
+  </ng-template>
+</div>

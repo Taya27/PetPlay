@@ -1,0 +1,11 @@
+.cont {
+    width: 960px;
+    position: absolute;
+    margin: 100px auto;
+    margin-left: 400px;
+    line-height: 1.4em;
+}
+
+@media only screen and (max-width: 479px){
+    .cont { width: 90%; margin-left: 0 }
+}

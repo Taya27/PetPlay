@@ -1,46 +1,33 @@
-#logo {
-	margin-left:20%;
-    width: 10%;
-    float: left;
-}
-
-#logo h1 a{
-	font-weight: bold;
-	color: inherit;
-	text-decoration: none; /*убираем подчеркивание*/
-	
-}
-
-#nav {
-  text-align:center;
-  width: 70%;
-  float: right;
-}
-
-#nav ul {
-  list-style: none; /*убираем маркеры списка*/
-  margin: 0; /*убираем отступы*/
-  padding-left: 0; /*убираем отступы*/
-  margin-top:25px; /*делаем отступ сверху*/
+.mat-toolbar {
+  height: 5vh;
+  flex: 1 1 auto;
   text-align: center;
 }
 
-#nav a {
-  text-decoration: none; /*убираем подчеркивание текста ссылок*/
-  background:#30A8E6; /*добавляем фон к пункту меню*/
-  color:#fff; /*меняем цвет ссылок*/
-  padding:10px; /*добавляем отступ*/
-  font-family: arial; /*меняем шрифт*/
-  border-radius:4px; /*добавляем скругление*/
-  font-weight: bold;
+.basic {
+  height: 12vh;
 }
 
-#nav  a:hover {
-  background:#1C85BB;/*добавляем эффект при наведении*/
+.span {
+  font-family: Georgia, serif;
+  font-style: Italic;
+  font-size: 20px;
 }
-#nav li {
-  margin-right:5px; /*Добавляем отступ у пунктов меню*/
-  float: none;
-  display: inline-block;
-  
+
+h6 {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, sans-serif;
+}
+
+.mat-sidenav {
+  background: darkblue;
+}
+
+.tabs {
+  padding-left: 5px;
+  color: white;
+  font-size: 12px;
+  font-family: Verdana, sans-serif;
 }

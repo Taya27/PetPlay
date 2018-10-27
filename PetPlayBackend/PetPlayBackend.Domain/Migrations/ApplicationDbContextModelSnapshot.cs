@@ -34,6 +34,28 @@ namespace PetPlayBackend.Domain.Migrations
                     b.ToTable("Accesses");
                 });
 
+            modelBuilder.Entity("PetPlayBackend.Domain.Models.Connection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTimeOffset?>("EndTime");
+
+                    b.Property<DateTimeOffset>("StartTime");
+
+                    b.Property<Guid>("ToyId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Connections");
+                });
+
             modelBuilder.Entity("PetPlayBackend.Domain.Models.Pet", b =>
                 {
                     b.Property<Guid>("Id")
@@ -95,6 +117,19 @@ namespace PetPlayBackend.Domain.Migrations
 
                     b.HasOne("PetPlayBackend.Domain.Models.User", "User")
                         .WithMany("Accesses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PetPlayBackend.Domain.Models.Connection", b =>
+                {
+                    b.HasOne("PetPlayBackend.Domain.Models.Toy", "Toy")
+                        .WithMany("Connections")
+                        .HasForeignKey("ToyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PetPlayBackend.Domain.Models.User", "User")
+                        .WithMany("Connections")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

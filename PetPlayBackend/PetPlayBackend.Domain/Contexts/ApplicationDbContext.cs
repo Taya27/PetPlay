@@ -13,6 +13,8 @@ namespace PetPlayBackend.Domain.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Access> Accesses { get; set; }
 
+        public DbSet<Connection> Connections { get; set; }
+
         public ApplicationDbContext()
         {
             //Database.EnsureCreated();
@@ -32,6 +34,19 @@ namespace PetPlayBackend.Domain.Contexts
                .HasOne(a => a.Toy)
                .WithMany(u => u.Accesses)
                .HasForeignKey(x => x.ToyId);
+
+            modelBuilder.Entity<Connection>()
+                .HasKey(t => new { t.Id });
+
+            modelBuilder.Entity<Connection>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.Connections)
+                .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<Connection>()
+                .HasOne(a => a.Toy)
+                .WithMany(u => u.Connections)
+                .HasForeignKey(x => x.ToyId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

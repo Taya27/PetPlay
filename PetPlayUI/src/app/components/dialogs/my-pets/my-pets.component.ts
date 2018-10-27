@@ -12,8 +12,10 @@ export class MyPetsComponent implements OnInit {
   pets: PetModel[] = [];
   dataSource = new MatTableDataSource();
   userId: string = "";
-  displayedColumns: string[] = ['nickname', 'breed', 'kind', 'delete'];
+  displayedColumns: string[] = ['nickname', 'kind', 'breed', 'delete'];
 
+  errorText: string = "";
+  
   nickname: string = "";
   breed: string = "";
   kind: string = "";
@@ -32,6 +34,15 @@ export class MyPetsComponent implements OnInit {
   }
 
   addNewPet = () => {
+    if (!this.nickname ||
+        !this.breed ||
+        !this.kind) {
+          this.errorText = "Fill all fields please";
+          return;
+        }
+
+    this.errorText = "";
+
     const model = {
       nickname: this.nickname,
       breed: this.breed,
@@ -40,11 +51,11 @@ export class MyPetsComponent implements OnInit {
     } as AddNewPetViewModel;
 
     this.apiService.apiPetsAddPetPost(model).subscribe(result => {
-      //this.dataSource.data.push(result);
       this.pets.push(result);
       this.dataSource._updateChangeSubscription();
       this.nickname = "";
       this.breed = "";
+      this.kind = "";
     });
   }
 

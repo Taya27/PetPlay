@@ -6,8 +6,11 @@ import { RegisterComponent } from "./components/register/register.component";
 import { UserLoginedGuard } from "./user-logined.guard";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { UserNotLoginedGuard } from "./user-not-logined.guard";
+import { ToyConnectionComponent } from "./components/toy-connection/toy-connection.component";
 
 export const AppRoutes: Routes = [
+    { path: '', component: MainComponent },
+    
     {
         path: 'login',
         component: LoginComponent,
@@ -16,7 +19,6 @@ export const AppRoutes: Routes = [
     {
         path: "main",
         component: MainComponent
-
     },
     {
         path: "contacts",
@@ -31,5 +33,11 @@ export const AppRoutes: Routes = [
         path: "profile",
         component: ProfileComponent,
         canActivate: [UserNotLoginedGuard]
-    }
+    },
+    {
+        path: "toy-connection",
+        component: ToyConnectionComponent,
+        canActivate: [UserNotLoginedGuard]
+    },
+    { path: '**', component: MainComponent },
 ];

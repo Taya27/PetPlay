@@ -11,6 +11,7 @@ import { PetPlayService, AccessViewModel, ToyModel } from 'src/app/services/petp
 export class RegisterToyDialogComponent implements OnInit {
   toyId: string = "";
   userId: string = "";
+  errorText: string = "";
 
   constructor(public dialogRef: MatDialogRef<MyPetsComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -22,20 +23,38 @@ export class RegisterToyDialogComponent implements OnInit {
   }
 
   addNewToy = () => {
+    if (!this.isGuid(this.toyId)) {
+      this.errorText = "Invalid toy id format";
+      return;
+    }
+    this.errorText = "";
+
     const model: AccessViewModel = {
       userId: this.userId,
       toyId: this.toyId,
       isOwner: true
     };
 
-    this.apiService.apiAccessAddAccessPost(model).subscribe(result => {
+    this.apiService.apiAccessesAddAccessPost(model).subscribe(result => {
       if (result === "Access was granted!") {
         this.apiService
-          .apiAccessGetAccessByUserIdAndToyIdByUserIdByToyIdGet(this.userId, this.toyId)
+          .apiAccessesGetAccessByUserIdAndToyIdByUserIdByToyIdGet(this.userId, this.toyId)
           .subscribe(result => {
             this.dialogRef.close(result.toy);
           });
       }
-    }, error => alert(error))
+    }, error => this.errorText = error)
   }
+
+  exit = () => {
+    this.dialogRef.close();
+  }
+
+  isGuid(stringToTest) {
+    if (stringToTest[0] === "{") {
+        stringToTest = stringToTest.substring(1, stringToTest.length - 1);
+    }
+    const regexGuid = /^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$/gi;
+    return regexGuid.test(stringToTest);
+}
 }

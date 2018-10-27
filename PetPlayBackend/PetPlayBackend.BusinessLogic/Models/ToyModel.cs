@@ -8,5 +8,7 @@ namespace PetPlayBackend.BusinessLogic.Models
     {
         public Guid Id { get; set; }
         public string Model { get; set; }
+
+        public List<ConnectionModel> Connections { get; set; }
     }
 }
