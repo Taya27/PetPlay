@@ -118,10 +118,6 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var userOwnToys = await _context.Accesses
-                    .Where(x => x.UserId == userId && x.IsOwner)
-                    .ToListAsync();
-
                 var userAccesses = await _context.Accesses
                     .Include(x => x.Toy)
                     .Where(x => x.UserId == userId && x.IsOwner)
