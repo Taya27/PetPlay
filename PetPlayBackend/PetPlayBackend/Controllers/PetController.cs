@@ -22,9 +22,33 @@ namespace PetPlayBackend.Controllers
             _petService = petService;
         }
 
+        [HttpGet("get-user-pets/{userId}")]
+        [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<PetModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUserPets(Guid userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _petService.GetAllUserPets(userId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("add-pet")]
         [Authorize]
-        [ProducesResponseType(typeof(BusinessLogic.Models.PetModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PetModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddPet([FromBody] AddNewPetViewModel model)

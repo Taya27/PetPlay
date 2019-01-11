@@ -3,10 +3,10 @@
     <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Personal data
+          {{ 'PROFILE.PersonalData' | translate }}
         </mat-panel-title>
         <mat-panel-description>
-          Watch your personal info here
+          {{ 'PROFILE.Info' | translate }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <app-personal-info></app-personal-info>

@@ -9,7 +9,7 @@ namespace PetPlayBackend.BusinessLogic.Services.Interfaces
 {
     public interface IPetService
     {
-        Task<IEnumerable<PetModel>> GetAllPets();
+        Task<IEnumerable<PetModel>> GetAllUserPets(Guid userId);
 
         Task<PetModel> AddNewPet(AddNewPetViewModel model);
 

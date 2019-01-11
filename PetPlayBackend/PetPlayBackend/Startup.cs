@@ -35,6 +35,8 @@ namespace PetPlayBackend
 
             Binder.BindContext(services);
 
+            services.AddSingleton<IRemoteService, RemoteService>(x => new RemoteService("172.21.15.177:5001"));
+
             services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IPetService, PetService>();
@@ -87,6 +89,8 @@ namespace PetPlayBackend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

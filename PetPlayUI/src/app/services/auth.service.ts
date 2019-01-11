@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 
 const TOKEN = "AUTH_TOKEN";
 const USER_ID = "USER_ID";
+const ROLE = "ROLE";
 const API_URL = environment.API_BASE_URL;
 
 @Injectable({
@@ -27,10 +28,17 @@ export class AuthService {
     return this.isLogined;
   }
   
+  public isAdmin(): Boolean {
+    if (this.isLogined) {
+      return +localStorage.getItem("ROLE") == 1;
+    }
+  }
+
   public getUserId = () => this.userId;
 
   public logOut() {
     localStorage.removeItem(TOKEN);
+    localStorage.removeItem(ROLE);
     localStorage.removeItem(USER_ID);
     this.isLogined = false;
   }
@@ -57,7 +65,12 @@ export class AuthService {
           this.userId = res.user_id;
           localStorage.setItem(TOKEN, res.auth_token);
           localStorage.setItem(USER_ID, res.user_id);
-          return true;
+          localStorage.setItem(ROLE, res.role);
+          if (this.isAdmin()) {
+            return "/admin"
+          }
+
+          return "/profile";
         })
       );
   }

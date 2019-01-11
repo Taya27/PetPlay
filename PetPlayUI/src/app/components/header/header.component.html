@@ -1,50 +1,34 @@
-<!--<div id="header">
-  <div class="container">
-  
-
-      <div id="logo">
-         <img src="images/logoBig.jpg" height="70">
-         <h1><a href="#">PetPlay</a></h1>
-      </div>
-      
-    <nav id="nav">
-      <ul>
-        <li><a [routerLink]='["/main"]'>Главная</a></li>
-        <li><a href="about.html">О нас</a></li>
-        <li><a [routerLink]='["/contacts"]'>Контакты</a></li>
-        <li><a [routerLink]='["/login"]'>Мой кабинет</a></li>
-        <li *ngIf="authService.isUserLogined()" style="cursor: pointer"><a (click)="logOut()">Выйти</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>-->
 <div style="position:absolute;top:0;left:0;right:0;bottom:0;">
   <mat-divider></mat-divider>
   <div fxShow="true" fxHide.lt-md="true" >
     <mat-toolbar class="basic" color="basic" fxLayout="row" fxLayoutAlign="space-evenly start">
       <mat-nav-list style="margin: auto">
         <button mat-raised-button routerLink='/main' routerLinkActive="active">
-          <mat-icon>home</mat-icon><br />HOME
+          <mat-icon>home</mat-icon><br />{{ 'NAVIGATION.Home' | translate }}
         </button>
 
-        <button mat-raised-button>
-          <mat-icon>help_outline</mat-icon><br />ABOUT US
+        <button mat-raised-button (click)="changeLang()">
+          <mat-icon>help_outline</mat-icon><br />{{lang}}
         </button>
 
         <button mat-raised-button routerLink='/contacts' routerLinkActive='active'>
-          <mat-icon>account_box</mat-icon><br />CONTACTS
+          <mat-icon>account_box</mat-icon><br />{{ 'NAVIGATION.Contacts' | translate }}
         </button>
 
-        <button mat-raised-button routerLink="/toy-connection" *ngIf="authService.isUserLogined()">
-          <mat-icon>cast_connected</mat-icon><br />TOY CONNECTION
+        <button mat-raised-button routerLink="/toy-connection" *ngIf="authService.isUserLogined() && !authService.isAdmin()">
+          <mat-icon>cast_connected</mat-icon><br />{{ 'NAVIGATION.ToyConnection' | translate }}
         </button>
 
-        <button mat-raised-button routerLink="/login">
-          <mat-icon>assignment</mat-icon><br />MY ACCOUNT
+        <button mat-raised-button routerLink="/login" *ngIf="!authService.isAdmin()">
+          <mat-icon>assignment</mat-icon><br />{{ 'NAVIGATION.MyAccount' | translate }}
+        </button>
+
+        <button mat-raised-button routerLink="/admin" *ngIf="authService.isAdmin()">
+          <mat-icon>assignment</mat-icon><br />{{ 'NAVIGATION.Admin' | translate }}
         </button>
 
         <button mat-raised-button *ngIf="authService.isUserLogined()" (click)="logOut()">
-          <mat-icon>exit_to_app</mat-icon><br />LOG OUT
+          <mat-icon>exit_to_app</mat-icon><br />{{ 'NAVIGATION.LogOut' | translate }}
         </button>
       </mat-nav-list>
     </mat-toolbar>

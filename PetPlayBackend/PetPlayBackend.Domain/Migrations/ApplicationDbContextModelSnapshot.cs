@@ -76,12 +76,32 @@ namespace PetPlayBackend.Domain.Migrations
                     b.ToTable("Pets");
                 });
 
+            modelBuilder.Entity("PetPlayBackend.Domain.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Admin" },
+                        new { Id = 2, Name = "Common" }
+                    );
+                });
+
             modelBuilder.Entity("PetPlayBackend.Domain.Models.Toy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Model");
+
+                    b.Property<string>("QRUrl");
 
                     b.HasKey("Id");
 
@@ -103,7 +123,13 @@ namespace PetPlayBackend.Domain.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(2);
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -139,6 +165,14 @@ namespace PetPlayBackend.Domain.Migrations
                     b.HasOne("PetPlayBackend.Domain.Models.User", "User")
                         .WithMany("Pets")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PetPlayBackend.Domain.Models.User", b =>
+                {
+                    b.HasOne("PetPlayBackend.Domain.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

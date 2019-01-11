@@ -24,6 +24,8 @@
     "@angular/router": "^6.1.0",
     "@ngx-loading-bar/http-client": "^2.2.0",
     "@ngx-loading-bar/router": "^2.2.0",
+    "@ngx-translate/core": "^10.0.2",
+    "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"

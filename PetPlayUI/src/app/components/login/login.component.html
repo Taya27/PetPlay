@@ -1,14 +1,14 @@
 <div class="example-form">
   <mat-form-field class="example-full-width" style="margin-top: 100px">
-    <input matInput placeholder="Login" [(ngModel)]="login">
+    <input matInput placeholder="{{ 'LOGIN.Login' | translate }}" [(ngModel)]="login">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input type="password" matInput placeholder="Password" [(ngModel)]="password">
+    <input type="password" matInput placeholder="{{ 'LOGIN.Password' | translate }}" [(ngModel)]="password">
   </mat-form-field>
 
   <p style="color: red; font-size: 14pt" *ngIf="errorText">{{errorText}}</p>
 
-  <button mat-raised-button color="primary" (click)="logIn()">Login</button>
-  <button mat-raised-button color="primary" (click)="navigateToRegister()" style="margin-left: 10px">Register</button>
+  <button mat-raised-button color="primary" (click)="logIn()">{{ 'LOGIN.Login' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="navigateToRegister()" style="margin-left: 10px">{{ 'LOGIN.Register' | translate }}</button>
 </div>

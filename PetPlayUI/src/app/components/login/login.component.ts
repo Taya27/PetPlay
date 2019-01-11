@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     
     this.authService.login(loginModel).subscribe(result => {
       if (result) {
-        this.router.navigateByUrl('/profile');
+        this.router.navigateByUrl(result);
       }
     }, error => this.errorText = "Invalid password or user");
   }

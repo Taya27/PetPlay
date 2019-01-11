@@ -761,6 +761,72 @@ export class PetPlayService {
     }
 
     /**
+     * @return Success
+     */
+    apiPetsGetUserPetsByUserIdGet(userId: string): Observable<PetModel[]> {
+        let url_ = this.baseUrl + "/api/pets/get-user-pets/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiPetsGetUserPetsByUserIdGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiPetsGetUserPetsByUserIdGet(<any>response_);
+                } catch (e) {
+                    return <Observable<PetModel[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PetModel[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiPetsGetUserPetsByUserIdGet(response: HttpResponseBase): Observable<PetModel[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <PetModel[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PetModel[]>(<any>null);
+    }
+
+    /**
      * @param model (optional) 
      * @return Success
      */
@@ -894,6 +960,110 @@ export class PetPlayService {
     }
 
     /**
+     * @param info (optional) 
+     * @return Success
+     */
+    apiRemoteSetStatePost(info: LedQueryInfo | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/remote/set-state";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(info);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiRemoteSetStatePost(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiRemoteSetStatePost(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiRemoteSetStatePost(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param quantity (optional) 
+     * @return Success
+     */
+    apiRemoteTurnOnRingPost(quantity: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/remote/turn-on-ring";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(quantity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiRemoteTurnOnRingPost(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiRemoteTurnOnRingPost(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiRemoteTurnOnRingPost(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
      * @param model (optional) 
      * @return Success
      */
@@ -991,6 +1161,69 @@ export class PetPlayService {
     }
 
     protected processApiToysGetAllToysGet(response: HttpResponseBase): Observable<ToyModel[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ToyModel[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result500: any = null;
+            result500 = _responseText === "" ? null : <any>JSON.parse(_responseText, this.jsonParseReviver);
+            return throwException("A server error occurred.", status, _responseText, _headers, result500);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ToyModel[]>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    apiToysDeleteAllToysGet(): Observable<ToyModel[]> {
+        let url_ = this.baseUrl + "/api/toys/delete-all-toys";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApiToysDeleteAllToysGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApiToysDeleteAllToysGet(<any>response_);
+                } catch (e) {
+                    return <Observable<ToyModel[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ToyModel[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApiToysDeleteAllToysGet(response: HttpResponseBase): Observable<ToyModel[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1172,6 +1405,7 @@ export interface UserModel {
     firstName?: string | undefined;
     lastName?: string | undefined;
     email?: string | undefined;
+    roleId?: number | undefined;
     nickname?: string | undefined;
     accesses?: AccessModel[] | undefined;
     pets?: PetModel[] | undefined;
@@ -1181,6 +1415,8 @@ export interface UserModel {
 export interface ToyModel {
     id?: string | undefined;
     model?: string | undefined;
+    qrUrl?: string | undefined;
+    isOwnedBySomeone?: boolean | undefined;
     connections?: ConnectionModel[] | undefined;
 }
 
@@ -1225,6 +1461,11 @@ export interface AddNewPetViewModel {
     breed?: string | undefined;
     kind?: string | undefined;
     userId?: string | undefined;
+}
+
+export interface LedQueryInfo {
+    led?: number | undefined;
+    state?: number | undefined;
 }
 
 export interface ToyViewModel {

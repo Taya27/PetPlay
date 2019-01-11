@@ -24,7 +24,7 @@ import { PetPlayService, API_BASE_URL } from './services/petplay.service';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routes';
 import { MainComponent } from './components/main/main.component';
@@ -48,6 +48,13 @@ import { DeleteFriendGrantsComponent } from './components/dialogs/delete-friend-
 import { ToyConnectionComponent } from './components/toy-connection/toy-connection.component';
 import { SelectToyToShareComponent } from './components/dialogs/select-toy-to-share/select-toy-to-share.component';
 import { DeleteToyComponent } from './components/dialogs/delete-toy/delete-toy.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { AdminComponent } from './components/admin/admin.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -70,7 +77,8 @@ import { DeleteToyComponent } from './components/dialogs/delete-toy/delete-toy.c
     DeleteFriendGrantsComponent,
     ToyConnectionComponent,
     SelectToyToShareComponent,
-    DeleteToyComponent
+    DeleteToyComponent,
+    AdminComponent
   ],
   imports: [
     HttpClientModule,
@@ -80,6 +88,13 @@ import { DeleteToyComponent } from './components/dialogs/delete-toy/delete-toy.c
     RouterModule.forRoot(AppRoutes),
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,

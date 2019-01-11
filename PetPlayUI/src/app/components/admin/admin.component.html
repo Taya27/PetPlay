@@ -1,0 +1,56 @@
+<div class="cont">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Admin
+        </mat-panel-title>
+        <mat-panel-description>
+          Toys
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Toy name" [(ngModel)]="toyName" name="toyname">
+        </mat-form-field>
+        <button (click)="addToy()" mat-raised-button color="primary" style="margin-left: 10px">Add toy</button>
+      </form>
+
+      <table mat-table 
+       [dataSource]="myOwnToysSource"
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> Model </th>
+    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="qr">
+    <th mat-header-cell *matHeaderCellDef> QR-Code </th>
+    <td mat-cell *matCellDef="let element" style="cursor: pointer"> 
+      <i class="material-icons" style="margin-top: 8px" (click)="watchQr(element.qrUrl)">camera_enhance</i> 
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isOwned">
+    <th mat-header-cell *matHeaderCellDef> Is Owned </th>
+    <td mat-cell *matCellDef="let element"> 
+      <p *ngIf="element.isOwnedBySomeone">Yes</p>
+      <p *ngIf="!element.isOwnedBySomeone">No</p>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedOwnToysColumns"></tr>
+  <tr class="element-row" 
+      mat-row 
+      *matRowDef="let row; columns: displayedOwnToysColumns;" 
+      [(class.selected)]="row === selectedToy"
+      (click)="selectToy(row)"></tr>
+</table>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

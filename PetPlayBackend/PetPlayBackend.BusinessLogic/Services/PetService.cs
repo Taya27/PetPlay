@@ -23,11 +23,11 @@ namespace PetPlayBackend.BusinessLogic.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<PetModel>> GetAllPets()
+        public async Task<IEnumerable<PetModel>> GetAllUserPets(Guid userId)
         {
             try
             {
-                var pets = await _context.Pets.ToListAsync();
+                var pets = await _context.Pets.Where(x => x.UserId == userId).ToListAsync();
 
                 return pets.Select(x => _mapper.Map<PetModel>(x));
             }

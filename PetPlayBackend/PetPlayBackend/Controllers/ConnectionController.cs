@@ -23,7 +23,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPost("add-connection")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(ConnectionModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -47,7 +47,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-user-connection/{userId}")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(ConnectionModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -71,7 +71,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPut("disconnect/{toyId}")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-   API_BASE_URL: "http://localhost:1227"
+   API_BASE_URL: "http://localhost:5000"
   //API_BASE_URL: "http://kamaji1997-001-site1.etempurl.com"
 };
 

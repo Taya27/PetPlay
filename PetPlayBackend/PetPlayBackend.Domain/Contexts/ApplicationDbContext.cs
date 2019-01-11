@@ -12,6 +12,7 @@ namespace PetPlayBackend.Domain.Contexts
         public DbSet<Toy> Toys { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Access> Accesses { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public DbSet<Connection> Connections { get; set; }
 
@@ -47,6 +48,12 @@ namespace PetPlayBackend.Domain.Contexts
                 .HasOne(a => a.Toy)
                 .WithMany(u => u.Connections)
                 .HasForeignKey(x => x.ToyId);
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role {Id = 1, Name = "Admin"},
+                new Role {Id = 2, Name = "Common"});
+
+            modelBuilder.Entity<User>().Property(b => b.RoleId).HasDefaultValue(2);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

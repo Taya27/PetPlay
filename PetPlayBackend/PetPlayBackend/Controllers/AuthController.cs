@@ -49,7 +49,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPost("login")]
-        [AllowAnonymous] // CHANGE
+        [AllowAnonymous] 
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -67,7 +67,7 @@ namespace PetPlayBackend.Controllers
 
                 var jwtToken = _tokenService.BuildToken(result.Id);
 
-                return Ok(new { auth_token = jwtToken, user_id = result.Id });
+                return Ok(new { auth_token = jwtToken, user_id = result.Id, role = result.RoleId });
             }
             catch (Exception ex)
             {

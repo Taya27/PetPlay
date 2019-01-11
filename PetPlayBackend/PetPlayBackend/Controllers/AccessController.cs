@@ -23,7 +23,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpPost("add-access")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -47,7 +47,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-user-accesses/{userId}")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(IEnumerable<AccessModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -71,7 +71,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-user-granted-toys/{userId}")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(IEnumerable<GrantedToyViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -95,7 +95,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-user-toy-grants/{userId}")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(IEnumerable<GrantedToyViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -119,7 +119,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-access-by-user-id-and-toy-id/{userId}/{toyId}")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(AccessModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -143,7 +143,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpDelete("delete-access-by-user-id-and-toy-id/{userId}/{toyId}")]
-        [AllowAnonymous] // CHANGE
+        [Authorize] // CHANGE
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]

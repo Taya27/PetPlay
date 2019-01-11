@@ -22,7 +22,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-all-users")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]
@@ -41,7 +41,7 @@ namespace PetPlayBackend.Controllers
         }
 
         [HttpGet("get-user/{id}")]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status500InternalServerError)]

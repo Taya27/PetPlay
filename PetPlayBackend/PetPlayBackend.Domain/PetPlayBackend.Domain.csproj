@@ -13,6 +13,7 @@
     <Compile Remove="Migrations\20181027140345_added-guid-auto-generation1.cs" />
     <Compile Remove="Migrations\20181027140428_added-guid-auto-generation1.cs" />
     <Compile Remove="Migrations\20181027144805_fixed-connection-primary-key.cs" />
+    <Compile Remove="Migrations\20190111184756_added-role.cs" />
   </ItemGroup>
 
   <ItemGroup>

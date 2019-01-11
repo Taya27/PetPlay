@@ -8,14 +8,17 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
   styleUrls: ['./delete-friend-grants.component.css']
 })
 export class DeleteFriendGrantsComponent implements OnInit {
+  param = { name: "", toy: ""};
   userName: string = "";
   toyModel: string = "";
   
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef < DeleteDialogComponent > ) {
       const user = data.user;
-      this.userName = user.firstName + " " + user.lastName + "'s";
+      this.userName = user.firstName + " " + user.lastName + "";
       this.toyModel = data.toyModel;
+      this.param.name = this.userName;
+      this.param.toy = this.toyModel;
   }
 
   ngOnInit() {

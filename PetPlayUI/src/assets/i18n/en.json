@@ -1,0 +1,54 @@
+{
+    "NAVIGATION": {
+        "Home": "HOME",
+        "About": "About",
+        "Contacts": "CONTACTS",
+        "ToyConnection": "TOY CONNECTION",
+        "MyAccount": "MY ACCOUNT",
+        "Admin": "ADMIN",
+        "LogOut": "LOG OUT"
+    },
+    "HOME": {
+        "HelloText": "Currently, due to the busy and tight schedule, people have begun to spend less time with their pets. PetPlay is designed specifically for those who want to be closer to smaller friends. Being at work, walking, at a party, having lunch - you can connect to PetPlay and watch your furry friend, play with him, even feed him. Also, you can prevent such unpleasant situations as gnawed things and wallpaper."
+    },
+    "LOGIN": {
+        "Login": "Login",
+        "Password": "Password",
+        "Register": "Register"
+    },
+    "REGISTER": {
+        "Email": "Email",
+        "Password": "Password",
+        "Confirm": "Confirm password",
+        "Nickname": "Nickname",
+        "FirstName": "First name",
+        "LastName": "Last name"
+    },
+    "PROFILE": {
+        "PersonalData": "Personal data",
+        "Info": "Watch your personal info here",
+        "MyPets": "My pets",
+        "YourPets": "Your pets",
+        "Nickname": "Nickname",
+        "Kind": "Kind",
+        "Breed": "Breed",
+        "AddNewPet": "Add new pet",
+        "PetNick": "Pet nickname",
+        "Add": "Add",
+        "Exit": "Exit",
+
+        "MyFriends": "My friends",
+        "AddFriendsInfo": "Add new friends, give access to your toys",
+        "StartTyping": "Start typing your friend's nickname",
+        "SelectToy": "Select toy to share",
+        "ShareToy": "Share toy",
+        "ToysGrants": "My toys grants to friends",
+        "ToyModel": "Toy model",
+        "FriendsName": "Friend's name",
+        "DeleteAccessQuest": "Delete {{name}}'s access to {{toy}} toy",
+        "AreYouSureDeleteAccess": "Are you sure that you want to delete this access?",
+        "Delete": "Delete",
+        "Cancel": "Cancel"
+
+    }
+}

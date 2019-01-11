@@ -37,9 +37,10 @@ namespace PetPlayBackend.BusinessLogic.Services
                     throw new Exception("This user already registered");
                 }
 
-                var userModel = _mapper.Map<Domain.Models.User>(model);
+                var userModel = _mapper.Map<User>(model);
 
                 userModel.Password = AccountHelper.GetPasswordHash(model.Password);
+                userModel.RoleId = 2;
 
                 _context.Users.Add(userModel);
 
@@ -77,7 +78,7 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var result = await _context.Users.Include(x => x.Pets).ToListAsync();
+                var result = await _context.Users.Include(x => x.Pets).Where(x => x.RoleId != 1).ToListAsync();
 
                 return result.Select(x => _mapper.Map<Models.UserModel>(x));
             }

@@ -1,17 +1,17 @@
-<h2 mat-dialog-title>Your pets</h2>
+<h2 mat-dialog-title>{{ 'PROFILE.YourPets' | translate }}</h2>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="nickname">
-    <th mat-header-cell *matHeaderCellDef> Nickname </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'PROFILE.Nickname' | translate }} </th>
     <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="kind">
-    <th mat-header-cell *matHeaderCellDef> Kind </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'PROFILE.Kind' | translate }} </th>
     <td mat-cell *matCellDef="let element"> {{element.kind}} </td>
   </ng-container>
 
   <ng-container matColumnDef="breed">
-    <th mat-header-cell *matHeaderCellDef> Breed </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'PROFILE.Breed' | translate }} </th>
     <td mat-cell *matCellDef="let element"> {{element.breed}} </td>
   </ng-container>
 
@@ -27,24 +27,24 @@
 </table>
 
 <div style="margin-top: 10px">
-  <h2 mat-dialog-title>Add new pet</h2>
+  <h2 mat-dialog-title>{{ 'PROFILE.AddNewPet' | translate }}</h2>
 
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Pet nickname" [(ngModel)]="nickname" name="nickname">
+      <input matInput placeholder="{{ 'PROFILE.PetNick' | translate }}" [(ngModel)]="nickname" name="nickname">
     </mat-form-field>
   
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Kind" [(ngModel)]="kind" name="kind">
+      <input matInput placeholder="{{ 'PROFILE.Kind' | translate }}" [(ngModel)]="kind" name="kind">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Breed" [(ngModel)]="breed" name="breed">
+      <input matInput placeholder="{{ 'PROFILE.Breed' | translate }}" [(ngModel)]="breed" name="breed">
     </mat-form-field>
   <br/>
     <p style="color: red; font-size: 14pt" *ngIf="errorText">{{errorText}}</p>
 
-    <button mat-stroked-button color="primary" (click)="addNewPet()">Add</button>
-    <button mat-stroked-button color="warn" (click)="close()" mat-dialog-close style="margin-left: 10px">Exit</button>
+    <button mat-stroked-button color="primary" (click)="addNewPet()">{{ 'PROFILE.Add' | translate }}</button>
+    <button mat-stroked-button color="warn" (click)="close()" mat-dialog-close style="margin-left: 10px">{{ 'PROFILE.Exit' | translate }}</button>
   </form>
 </div>

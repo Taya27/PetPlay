@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Delete {{userName}} access to {{toyModel}} toy</h2>
+<h2 mat-dialog-title>{{ 'PROFILE.DeleteAccessQuest' | translate:param }}</h2>  
 <mat-dialog-content>
-  Are you sure that you want to delete this access?
-</mat-dialog-content>
+  {{ 'PROFILE.AreYouSureDeleteAccess' | translate }}
+</mat-dialog-content>te
 <mat-dialog-actions>
-  <button mat-stroked-button color="warn" (click)="close()" mat-dialog-close>Delete</button>
-  <button mat-stroked-button color="primary" style="margin-left: 10px" mat-dialog-close>Cancel</button>
+  <button mat-stroked-button color="warn" (click)="close()" mat-dialog-close>{{ 'PROFILE.Delete' | translate }}</button>
+  <button mat-stroked-button color="primary" style="margin-left: 10px" mat-dialog-close>{{ 'PROFILE.Cancel' | translate }}</button>
 </mat-dialog-actions>

@@ -51,7 +51,6 @@ export class MyToysComponent implements OnInit {
         this.grantedUserAccesses = result;
         this.myGrantedAccessesSource.data = this.grantedUserAccesses;
       });
-      
   }
 
   openToyRegister = () => {

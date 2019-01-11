@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHXL0+SF2DUi3DQetEuKbaQAAAAACAAAAAAAQZgAAAAEAACAAAADKynstZQu6cawKvCGpo5EhYWk0zQ7Vo8IZkQyjIBpQNAAAAAAOgAAAAAIAACAAAADVY/6Wdr1+1VNEmCswJOXBR0B9NurFvxHhEsapbqFvniAAAABsEAt95/hVGXSK/dPd3cDKpHbr1j347F24qkwX0RG97UAAAACtwtFTxKc8CWWwG8zVnvwp7FDarxmxeMnTnT6KxDjdZXjgLR4TRdHY8zGkJ3i+0tT0/gPE/D3z5oawNH0q2RuS</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp-eu.site4now.net/petiplay</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>10/08/2018 22:11:40</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>10/21/2018 22:40:47</publishTime>
+    </File>
+    <File Include="AutoMapper.dll">
+      <publishTime>06/18/2018 13:00:14</publishTime>
+    </File>
+    <File Include="AutoMapper.Extensions.Microsoft.DependencyInjection.dll">
+      <publishTime>07/20/2018 18:45:54</publishTime>
+    </File>
+    <File Include="dotnet-aspnet-codegenerator-design.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll">
+      <publishTime>04/30/2018 16:29:02</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
+      <publishTime>04/30/2018 16:29:04</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>09/20/2018 15:08:26</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>09/20/2018 15:08:30</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>09/20/2018 15:08:30</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <publishTime>09/20/2018 15:08:26</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
+      <publishTime>06/07/2018 00:27:00</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll">
+      <publishTime>06/07/2018 00:26:58</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.dll">
+      <publishTime>06/07/2018 00:26:54</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll">
+      <publishTime>06/07/2018 00:26:56</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
+      <publishTime>06/07/2018 00:26:58</publishTime>
+    </File>
+    <File Include="NuGet.Frameworks.dll">
+      <publishTime>04/24/2018 21:27:10</publishTime>
+    </File>
+    <File Include="PetPlayBackend.BusinessLogic.dll">
+      <publishTime>10/28/2018 11:51:30</publishTime>
+    </File>
+    <File Include="PetPlayBackend.BusinessLogic.pdb">
+      <publishTime>10/28/2018 11:51:30</publishTime>
+    </File>
+    <File Include="PetPlayBackend.deps.json">
+      <publishTime>10/28/2018 12:40:46</publishTime>
+    </File>
+    <File Include="PetPlayBackend.dll">
+      <publishTime>10/28/2018 12:11:22</publishTime>
+    </File>
+    <File Include="PetPlayBackend.Domain.dll">
+      <publishTime>10/28/2018 11:51:28</publishTime>
+    </File>
+    <File Include="PetPlayBackend.Domain.pdb">
+      <publishTime>10/28/2018 11:51:28</publishTime>
+    </File>
+    <File Include="PetPlayBackend.pdb">
+      <publishTime>10/28/2018 12:11:22</publishTime>
+    </File>
+    <File Include="PetPlayBackend.runtimeconfig.json">
+      <publishTime>10/28/2018 12:40:46</publishTime>
+    </File>
+    <File Include="Remotion.Linq.dll">
+      <publishTime>08/24/2018 19:03:51</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.dll">
+      <publishTime>07/06/2018 17:09:06</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>07/06/2018 17:09:02</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>07/06/2018 17:09:02</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>07/06/2018 17:09:04</publishTime>
+    </File>
+    <File Include="System.Composition.AttributedModel.dll">
+      <publishTime>08/24/2018 19:05:57</publishTime>
+    </File>
+    <File Include="System.Composition.Convention.dll">
+      <publishTime>08/24/2018 19:05:57</publishTime>
+    </File>
+    <File Include="System.Composition.Hosting.dll">
+      <publishTime>08/24/2018 19:05:58</publishTime>
+    </File>
+    <File Include="System.Composition.Runtime.dll">
+      <publishTime>08/24/2018 19:05:58</publishTime>
+    </File>
+    <File Include="System.Composition.TypedParts.dll">
+      <publishTime>08/24/2018 19:05:58</publishTime>
+    </File>
+    <File Include="System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>09/18/2018 19:38:16</publishTime>
+    </File>
+    <File Include="System.Interactive.Async.dll">
+      <publishTime>08/24/2018 19:05:43</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>10/28/2018 12:40:46</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

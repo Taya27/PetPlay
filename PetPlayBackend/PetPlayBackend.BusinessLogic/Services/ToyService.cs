@@ -24,12 +24,18 @@ namespace PetPlayBackend.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task AddNewToy(ToyViewModel model)
+        public async Task<ToyModel> AddNewToy(ToyViewModel model, string url)
         {
             try
             {
-                await _context.Toys.AddAsync(_mapper.Map<Toy>(model));
+                var map = _mapper.Map<Toy>(model);
+                await _context.Toys.AddAsync(map);
                 await _context.SaveChangesAsync();
+
+                map.QRUrl = $"{url}/{map.Id}.jpeg";
+                await _context.SaveChangesAsync();
+
+                return _mapper.Map<ToyModel>(map);
             }
             catch (Exception ex)
             {
@@ -41,9 +47,34 @@ namespace PetPlayBackend.BusinessLogic.Services
         {
             try
             {
-                var result = await _context.Toys.ToListAsync();
+                var toys = await _context.Toys.ToListAsync();
+                var map = new List<ToyModel>();
 
-                return result.Select(x => _mapper.Map<ToyModel>(x));
+                foreach (var toy in toys)
+                {
+                    map.Add(new ToyModel
+                    {
+                        Id = toy.Id,
+                        Model = toy.Model,
+                        QRUrl = toy.QRUrl,
+                        IsOwnedBySomeone = _context.Accesses.Any(x => x.ToyId == toy.Id && x.IsOwner),
+                    });
+                }
+
+                return map;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task DeleteAllToys()
+        {
+            try
+            {
+                _context.Toys.RemoveRange(_context.Toys);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

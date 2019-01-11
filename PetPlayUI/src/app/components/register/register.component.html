@@ -1,26 +1,26 @@
 <div class="example-form">
   <mat-form-field class="example-full-width" style="margin-top: 20px">
-    <input matInput placeholder="Email" [(ngModel)]="email">
+    <input matInput placeholder="{{ 'REGISTER.Email' | translate }}" [(ngModel)]="email">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input type="password" matInput placeholder="Password" [(ngModel)]="password">
+    <input type="password" matInput placeholder="{{ 'REGISTER.Password' | translate }}" [(ngModel)]="password">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input type="password" matInput placeholder="Confirm password" [(ngModel)]="confirmPassword">
+    <input type="password" matInput placeholder="{{ 'REGISTER.Confirm' | translate }}" [(ngModel)]="confirmPassword">
   </mat-form-field>
 
   <mat-form-field class="example-full-width" style="margin-top: 10px">
-    <input matInput placeholder="Nickname" [(ngModel)]="nickname">
+    <input matInput placeholder="{{ 'REGISTER.Nickname' | translate }}" [(ngModel)]="nickname">
   </mat-form-field>
 
   <mat-form-field class="example-full-width" style="margin-top: 10px">
-    <input matInput placeholder="First name" [(ngModel)]="firstName">
+    <input matInput placeholder="{{ 'REGISTER.FirstName' | translate }}" [(ngModel)]="firstName">
   </mat-form-field>
 
   <mat-form-field class="example-full-width" style="margin-top: 10px">
-    <input matInput placeholder="Last name" [(ngModel)]="lastName">
+    <input matInput placeholder="{{ 'REGISTER.LastName' | translate }}" [(ngModel)]="lastName">
   </mat-form-field>
 
   <p style="color: red; font-size: 14pt" *ngIf="errorText">{{errorText}}</p>

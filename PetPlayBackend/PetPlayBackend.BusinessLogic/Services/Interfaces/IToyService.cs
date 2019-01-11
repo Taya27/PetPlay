@@ -9,8 +9,10 @@ namespace PetPlayBackend.BusinessLogic.Services.Interfaces
 {
     public interface IToyService
     {
-        Task AddNewToy(ToyViewModel model);
+        Task<ToyModel> AddNewToy(ToyViewModel model, string url);
 
         Task<IEnumerable<ToyModel>> GetAllToys();
+
+        Task DeleteAllToys();
     }
 }
